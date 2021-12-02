@@ -1,0 +1,31 @@
+path: "tensorflow.keras.optimizers.experimental"
+tf_module {
+  member {
+    name: "Adadelta"
+    mtype: "<type \'type\'>"
+  }
+  member {
+    name: "Adagrad"
+    mtype: "<type \'type\'>"
+  }
+  member {
+    name: "Adam"
+    mtype: "<type \'type\'>"
+  }
+  member {
+    name: "EMAOption"
+    mtype: "<type \'type\'>"
+  }
+  member {
+    name: "GradientsClipOption"
+    mtype: "<type \'type\'>"
+  }
+  member {
+    name: "Optimizer"
+    mtype: "<type \'type\'>"
+  }
+  member {
+    name: "SGD"
+    mtype: "<type \'type\'>"
+  }
+}

@@ -32,7 +32,9 @@ py_library(
         "optimizer_lib.py",
     ],
     srcs_version = "PY3",
-    deps = [],
+    deps = [
+        "//:expect_tensorflow_installed",
+    ],
 )
 
 py_test(

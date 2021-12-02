@@ -1,0 +1,13 @@
+path: "tensorflow.keras.optimizers.experimental.GradientsClipOption"
+tf_class {
+  is_instance: "<class \'keras.optimizer_experimental.optimizer_lib.GradientsClipOption\'>"
+  is_instance: "<type \'object\'>"
+  member_method {
+    name: "__init__"
+    argspec: "args=[\'self\', \'clipnorm\', \'clipvalue\', \'global_clipnorm\'], varargs=None, keywords=None, defaults=[\'None\', \'None\', \'None\'], "
+  }
+  member_method {
+    name: "get_config"
+    argspec: "args=[\'self\'], varargs=None, keywords=None, defaults=None"
+  }
+}

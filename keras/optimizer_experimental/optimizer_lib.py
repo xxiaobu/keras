@@ -1,6 +1,10 @@
 """Library of helper classes of optimizer."""
 
+# pylint: disable=g-direct-tensorflow-import
+from tensorflow.python.util.tf_export import keras_export
 
+
+@keras_export("keras.optimizers.experimental.GradientsClipOption", v1=[])
 class GradientsClipOption:
   """Gradients clip option for optimizer class.
 
@@ -40,6 +44,7 @@ class GradientsClipOption:
     }
 
 
+@keras_export("keras.optimizers.experimental.EMAOption", v1=[])
 class EMAOption:
   # TODO(b/207532340): Add examples on how to use this EMAOption.
   """EMA option for optimizer class.
