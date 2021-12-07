@@ -598,9 +598,6 @@ class BatchNormalizationBase(Layer):
           data_format=self._data_format,
           exponential_avg_factor=exponential_avg_factor)
 
-    def _fused_batch_norm_training_empty():
-      return inputs, self.moving_mean, self.moving_variance
-
     def _fused_batch_norm_inference():
       return tf.compat.v1.nn.fused_batch_norm(
           inputs,
@@ -612,16 +609,8 @@ class BatchNormalizationBase(Layer):
           is_training=False,
           data_format=self._data_format)
 
-    train_op = _fused_batch_norm_training
-    if use_fused_avg_updates and input_batch_size is not None:
-      # pylint: disable=g-long-lambda
-      train_op = lambda: control_flow_util.smart_cond(
-          input_batch_size > 0, _fused_batch_norm_training,
-          _fused_batch_norm_training_empty)
-      # pylint: enable=g-long-lambda
-
     output, mean, variance = control_flow_util.smart_cond(
-        training, train_op, _fused_batch_norm_inference)
+        training, _fused_batch_norm_training, _fused_batch_norm_inference)
     variance = _maybe_add_or_remove_bessels_correction(variance, remove=True)
 
     training_value = control_flow_util.constant_value(training)
