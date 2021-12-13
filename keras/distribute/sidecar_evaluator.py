@@ -17,6 +17,7 @@
 
 import tensorflow.compat.v2 as tf
 from tensorflow.python.platform import tf_logging as logging
+from tensorflow.python.util import deprecation  # pylint: disable=g-direct-tensorflow-import
 from tensorflow.python.util.tf_export import keras_export  # pylint: disable=g-direct-tensorflow-import
 
 _PRINT_EVAL_STEP_EVERY_SEC = 60.0
@@ -44,7 +45,7 @@ def list_checkpoint_attributes(ckpt_dir_or_file):
   return {name.split('/')[0] for name in variable_map.keys()}
 
 
-@keras_export('keras.experimental.SidecarEvaluator', v1=[])
+@keras_export('keras.utils.SidecarEvaluator', v1=[])
 class SidecarEvaluator:
   """A class designed for a dedicated evaluator task.
 
@@ -258,3 +259,21 @@ class SidecarEvaluator:
         # Exit the loop because we have evaluated the final checkpoint file.
         logging.info('Last checkpoint evaluated. SidecarEvaluator stops.')
         return
+
+
+@keras_export('keras.experimental.SidecarEvaluator', v1=[])
+@deprecation.deprecated_endpoints('keras.experimental.SidecarEvaluator')
+class SidecarEvaluatorExperimental(SidecarEvaluator):
+  """Deprecated. Please use `tf.keras.utils.SidecarEvaluator` instead.
+
+  Caution: `tf.keras.experimental.SidecarEvaluator` endpoint is
+    deprecated and will be removed in a future release. Please use
+    `tf.keras.utils.SidecarEvaluator`.
+  """
+
+  def __init__(self, *args, **kwargs):
+    logging.warning(
+        '`tf.keras.experimental.SidecarEvaluator` endpoint is '
+        'deprecated and will be removed in a future release. Please use '
+        '`tf.keras.utils.SidecarEvaluator`.')
+    super(SidecarEvaluatorExperimental, self).__init__(*args, **kwargs)
